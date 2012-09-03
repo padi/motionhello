@@ -4,19 +4,30 @@ class AppDelegate
     @window.makeKeyAndVisible #tells the OS that this window will be the one receiving touch events and that it should become visible on the screen
     # you can have multiple windows in multiple screens
 
-    @blue_view = UIView.alloc.initWithFrame(CGRectMake(10, 10, 100, 100)) # create a new view with dimensions given by CGRectMake
-    @blue_view.backgroundColor = UIColor.blueColor # Change BG color to blue
-    @window.addSubview(@blue_view) # add this view as a "subview" of window
+    # Chap 3 - Controllers
+    # rootViewController= - the window will take the given UIViewController and adjust it's view size to fir the window
+    #   - better way of setting up your window (instead of window.addSubview)
+    # initWithNibName:bundle: - loads a controller from a NIB file, of which are typically created in Xcode's Interface Builder
+    #   - we can safely pass nil because we're not using Interface Builder
+    #   - "designated initializer" of UIViewControllers; whenever you create a controller, you must call this method at some point
+    @window.rootViewController = TapController.alloc.initWithNibName nil, bundle: nil
+    # UIWindow have a rootViewController property for displaying controllers
 
-    @green_view = UIView.alloc.initWithFrame CGRectMake 30, 30, 40, 40
-    @green_view.backgroundColor = UIColor.greenColor
-    @window.addSubview @green_view
+    # Chap 2 - Views
+    # http://rubymotion-tutorial.com/2-views
+    #@blue_view = UIView.alloc.initWithFrame(CGRectMake(10, 10, 100, 100)) # create a new view with dimensions given by CGRectMake
+    #@blue_view.backgroundColor = UIColor.blueColor # Change BG color to blue
+    #@window.addSubview(@blue_view) # add this view as a "subview" of window
 
-    @red_view = UIView.alloc.initWithFrame CGRectMake 30, 30, 40, 40
-    @red_view.backgroundColor = UIColor.redColor
-    # NOTE: *not* adding to @window
-    @blue_view.addSubview @red_view
+    #@green_view = UIView.alloc.initWithFrame CGRectMake 30, 30, 40, 40
+    #@green_view.backgroundColor = UIColor.greenColor
+    #@window.addSubview @green_view
 
+    #@red_view = UIView.alloc.initWithFrame CGRectMake 30, 30, 40, 40
+    #@red_view.backgroundColor = UIColor.redColor
+    ## NOTE: *not* adding to @window
+    #@blue_view.addSubview @red_view
+    #
     # new classes
     # AppDelegate - responsible for controlling your app.
     # UIWindow - apps window; subclass of UIView
