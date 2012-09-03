@@ -4,13 +4,31 @@ class AppDelegate
     @window.makeKeyAndVisible #tells the OS that this window will be the one receiving touch events and that it should become visible on the screen
     # you can have multiple windows in multiple screens
 
+    # Chap 4 - Containers
+    controller = TapController.alloc.initWithNibName nil, bundle: nil
+    nav_controller = UINavigationController.alloc.initWithRootViewController controller
+
+    # Instantiate a TabBarController and add it as the rootViewController of UIWindow instance
+    tab_controller = UITabBarController.alloc.initWithNibName nil, bundle: nil
+    tab_controller.viewControllers = [nav_controller] # add nav_controller as a children controller
+    @window.rootViewController = tab_controller
+
+    # Make another tab by creating an empty UIViewController with a different background color in AppDelegate
+    other_controller = UIViewController.alloc.initWithNibName nil, bundle: nil
+    other_controller.title = "Other"
+    other_controller.view.backgroundColor = UIColor.purpleColor
+
+    tab_controller = UITabBarController.alloc.initWithNibName nil, bundle: nil
+    tab_controller.viewControllers = [nav_controller, other_controller]
+    @window.rootViewController = tab_controller
+
     # Chap 3 - Controllers
     # rootViewController= - the window will take the given UIViewController and adjust it's view size to fir the window
     #   - better way of setting up your window (instead of window.addSubview)
     # initWithNibName:bundle: - loads a controller from a NIB file, of which are typically created in Xcode's Interface Builder
     #   - we can safely pass nil because we're not using Interface Builder
     #   - "designated initializer" of UIViewControllers; whenever you create a controller, you must call this method at some point
-    @window.rootViewController = TapController.alloc.initWithNibName nil, bundle: nil
+    #@window.rootViewController = TapController.alloc.initWithNibName nil, bundle: nil
     # UIWindow have a rootViewController property for displaying controllers
 
     # Chap 2 - Views
