@@ -12,6 +12,7 @@ class AlphabetController < UIViewController
     self.view.addSubview @table
 
     @table.dataSource = self
+    @table.delegate = self
   end
 
   # params
@@ -35,5 +36,16 @@ class AlphabetController < UIViewController
   def tableView tableView, numberOfRowsInSection: section
     # return the number of rows
     @data.count
+  end
+
+  def tableView tableView, didSelectRowAtIndexPath: indexPath
+    # deselect probably means it gets the button/row back into "not selected" state
+    # by default UITableView keeps that row highlighted in blue
+    tableView.deselectRowAtIndexPath indexPath, animated: true
+
+    alert = UIAlertView.alloc.init
+    alert.message = "#{@data[indexPath.row]} tapped!"
+    alert.addButtonWithTitle "OK"
+    alert.show
   end
 end
